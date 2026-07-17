@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Free Movie Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            color: #e50914; /* Netflix Red Theme */
+            font-size: 2.5rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        /* Ad Banner Style */
+        .ad-space {
+            background-color: #1f1f1f;
+            border: 2px dashed #444;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #888;
+            font-weight: bold;
+        }
+        /* Upload Form Style */
+        .upload-section {
+            background-color: #1f1f1f;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        .upload-section h2 {
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: #333;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 4px;
+        }
+        .btn-submit {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .btn-submit:hover {
+            background-color: #b80710;
+        }
+        /* Movie Grid */
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .movie-card {
+            background-color: #1f1f1f;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .movie-card:hover {
+            transform: scale(1.05);
+        }
+        .movie-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+        .movie-details {
+            padding: 15px;
+        }
+        .movie-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .btn-watch {
+            display: inline-block;
+            background-color: #e50914;
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>CinemaHub</h1>
+        <p>Stream & Download Your Favorite Films</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- TOP AD PLACEHOLDER -->
+        <div class="ad-space">
+            <!-- Yahan aap apna Adsterra ya Monetag Banner Code Paste karein -->
+            [PLACE YOUR AD CODE HERE - BANNER 728x90]
+        </div>
+
+        <!-- UPLOAD SECTION (FRONTEND ONLY) -->
+        <div class="upload-section">
+            <h2>Upload New Movie / Video</h2>
+            <div class="form-group">
+                <input type="text" id="movieTitle" placeholder="Movie Title (e.g., My Awesome Short Film)">
+            </div>
+            <div class="form-group">
+                <input type="text" id="moviePoster" placeholder="Poster Image URL (e.g., https://site.com/poster.jpg)">
+            </div>
+            <div class="form-group">
+                <input type="text" id="movieLink" placeholder="Shortened Ad Link / Video Link (e.g., Terabox, Mega)">
+            </div>
+            <button class="btn-submit" onclick="addMovie()">Publish Movie</button>
+        </div>
+
+        <h2>Latest Releases</h2>
+        <hr style="border-color: #333; margin-bottom: 20px;">
+
+        <!-- MOVIES GRID -->
+        <div class="movies-grid" id="moviesGrid">
+            <!-- Demo Movie 1 -->
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500" alt="Demo Movie">
+                <div class="movie-details">
+                    <div class="movie-title">Sample Short Film 1</div>
+                    <a href="#" target="_blank" class="btn-watch">Watch / Download</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Temporary dynamic data builder
+        function addMovie() {
+            const title = document.getElementById('movieTitle').value;
+            const poster = document.getElementById('moviePoster').value;
+            const link = document.getElementById('movieLink').value;
+
+            if(!title || !poster || !link) {
+                alert("Please fill all the fields!");
+                return;
+            }
+
+            const grid = document.getElementById('moviesGrid');
+
+            // Creating a new movie card element
+            const card = document.createElement('div');
+            card.className = 'movie-card';
+            card.innerHTML = `
+                <img src="${poster}" alt="${title}">
+                <div class="movie-details">
+                    <div class="movie-title">${title}</div>
+                    <a href="${link}" target="_blank" class="btn-watch">Watch / Download</a>
+                </div>
+            `;
+
+            // Insert new movie at the top
+            grid.insertBefore(card, grid.firstChild);
+
+            // Clear inputs
+            document.getElementById('movieTitle').value = '';
+            document.getElementById('moviePoster').value = '';
+            document.getElementById('movieLink').value = '';
+        }
+    </script>
+</body>
+</html>
